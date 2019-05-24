@@ -4,7 +4,7 @@
 
 form表单和之前的任务都是周三之前就完成了
 
-然而最后的CUBD就看了很多很多
+然而最后的CURD就看了很多很多
 
 比如[Tomcat的实现原理][https://study.163.com/course/courseMain.htm?courseId=1208875840]
 
