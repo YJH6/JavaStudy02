@@ -12,7 +12,7 @@ public class LoginDao{
         //用户名
         String USER_NAME = "root";
         //密码
-        String PASSWORD = "yu191148912";
+        String PASSWORD = "root";
         //加载驱动
         Connection connection=null;
         Statement statement=null;
