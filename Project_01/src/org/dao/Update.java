@@ -21,7 +21,7 @@ public class Update {
             connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
             //发生sql,执行语句
             statement = connection.createStatement();
-            String updateSql="DELETE INTO yjh.user SET username = '"+username+"',password = '"+password+"'";
+            String updateSql="DELETE FROM yjh.user WHERE username = '"+username+"' AND password = '"+password+"'";
 
             int flag = statement.executeUpdate(updateSql);
 
@@ -33,12 +33,6 @@ public class Update {
                 count = resultSet.getInt(1);
             }
             return count;
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return -1;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
         } catch (Exception e){
             e.printStackTrace();
             return -1;

@@ -1,5 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.dao.Update" %>
-
+<%@page import="java.lang.Object" %>
 <html>
 <head>
     <title>Title</title>
@@ -7,14 +8,15 @@
 <body>
 <%
     request.setCharacterEncoding("UTF-8");
-    String username = request.getParameter("username");
-    String password = request.getParameter("password");
+    String username = (String)session.getAttribute("username");
+    String password = (String)session.getAttribute("password");
     Update dao = new Update();
     int result = dao.update(username,password);
     if(result==0){
         out.print("删除成功!");
     } else {
         out.print("系统错误!");
-    }%>
+    }
+%>
 </body>
 </html>

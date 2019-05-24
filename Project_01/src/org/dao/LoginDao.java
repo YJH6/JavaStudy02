@@ -3,9 +3,9 @@ package org.dao;
 import java.sql.*;
 import java.util.Scanner;
 
-public class LoginDao{
+public class LoginDao {
 
-    public int login(String username,String password){//1是登录成功 2是登录出错
+    public int login(String username, String password) {//1是登录成功 2是登录出错
         String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";//这com是特定的
         //数据库连接的地址
         String URL = "jdbc:mysql://localhost:3306/yjh?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";//mysql8的坑
@@ -14,41 +14,45 @@ public class LoginDao{
         //密码
         String PASSWORD = "root";
         //加载驱动
-        Connection connection=null;
-        Statement statement=null;
-        ResultSet resultSet=null;
-try {
-    Class.forName(DRIVER_NAME);
-    //获得连接(Java连接mysql数据库)
-    connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
-    //发生sql,执行语句
-    statement = connection.createStatement();
+        Connection connection = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            Class.forName(DRIVER_NAME);
+            //获得连接(Java连接mysql数据库)
+            connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
+            //发生sql,执行语句
+            statement = connection.createStatement();
 
-    String qureySql = "SELECT count(*) FROM yjh.user WHERE username = '"+username+"' AND password = '"+password+"'";
+            String qureySql = "SELECT count(*) FROM yjh.user WHERE username = '" + username + "' AND password = '" + password + "'";
 
-    int count = -1;
-    if(resultSet.next()) {
-        count = resultSet.getInt(1);
-    }
-    return count;
-}catch (ClassNotFoundException e) {
-    e.printStackTrace();
-    return -1;
-} catch (SQLException e) {
-    e.printStackTrace();
-    return -2;
-} catch (Exception e){
-    e.printStackTrace();
-    return -3;
-}
-    finally{
-        try{
-            if(resultSet!=null) resultSet.close();
-            if(statement!=null) statement.close();
-            if(connection!=null) connection.close();
-       } catch (SQLException e) {
-             e.printStackTrace();
+            resultSet = statement.executeQuery(qureySql);
+            int count = -1;
+            if(resultSet!=null){
+                 if (resultSet.next()) {
+                    count = resultSet.getInt(1);
+                 }
+            }
+            return count;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return -1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -2;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -3;
+        } finally {
+            try {
+                if (resultSet != null) resultSet.close();
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
-    }
 }
+
+

@@ -20,14 +20,19 @@
         out.print(result);
     }
 %>
+
+<form action="update.jsp" method="post" accept-charset="UTF-8">
+
 <%
     if(result>0) {
-        out.print("<form action = \"update.jsp\" method = \"post\" accept - charset = \"UTF-8\" ");
-        out.print("<input name = \"username\" value=\""+username+"\">");
-        out.print("<input name = \"username\" value=\""+password+"\">");
+        session.setAttribute("username",username);
+        session.setAttribute("password",password);
+        out.print("<form action=\"update.jsp\" method=\"post\" accept-charset=\"UTF-8\" >");
         out.print("注销:<br >");
         out.print("<input type = \"submit\" value = \"注销\" >");
         out.print("<br>");
+        out.print("</form>");
     }
-%></body>
+%>
+</body>
 </html>
